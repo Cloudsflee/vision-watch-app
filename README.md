@@ -1,9 +1,23 @@
-# VisionWatchApp
+# VisionWatchApp｜面向可穿戴终端的多模态交互链路
 
-VisionWatchApp 是一个 Android + Rokid 眼镜方向的视觉问答原型：用户拍摄眼前画面，
-通过语音输入问题，调用视觉模型生成回答，再用语音合成播放结果。仓库保留了移动端
-页面、摄像头采集、ASR/TTS 链路、模型请求和调试诊断代码；Rokid/SparkChain 的私有
-SDK 二进制由使用者在本机提供。
+VisionWatchApp 将“所见画面、自然语言提问和语音反馈”串成一条可观测的端侧交互链路：
+用户通过 Rokid/Android 终端采集视觉输入，以语音完成问题表达，经视觉模型推理后由
+TTS 返回可听见的结果。项目关注点是设备能力与 AI 服务之间的工程衔接，而非单一页面
+展示。
+
+仓库保留 CameraX 采集、SparkChain ASR/TTS、OpenAI-compatible Vision API、AudioTrack
+播放和 Debug 诊断实现。私有 SDK 二进制与真实凭据由使用者在本机提供，公开快照保留
+可审查的接口边界和离线 Mock 路径。
+
+## 项目亮点
+
+- **完整多模态闭环**：从图像采集、语音识别、视觉推理到语音播报，覆盖设备侧关键状态。
+- **可观测交互状态机**：以 pipeline stage、request id、HTTP 状态和耗时串联一次请求，
+  让真机问题可以沿链路定位。
+- **服务适配边界清晰**：`VisionApi` 抽象请求/响应，真实 HTTP 适配器与 `MockVisionApi`
+  共用契约，便于在 SDK 或后端不可用时继续验证 UI。
+- **面向穿戴设备的交互约束**：保留按键导航、权限处理、音频播放释放和超时 watchdog，
+  适配小屏、语音优先和不稳定网络环境。
 
 ## 能力链路
 
