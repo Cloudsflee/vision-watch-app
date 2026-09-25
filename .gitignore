@@ -1,0 +1,12 @@
+.gradle/
+.gradle-user-home/
+.kotlin/
+build/
+**/build/
+app/libs/*.aar
+app/libs/*.jar
+*.apk
+*.iml
+local.properties
+.tmp*
+*.log
